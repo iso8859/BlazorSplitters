@@ -40,6 +40,17 @@ namespace BlazorSplitters
             return System.Text.Json.JsonSerializer.Deserialize<DOMRect>(tmp);
         }
 
+        public async Task SPCapturePointer(string elementId, long pointerId)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("SPCapturePointer", elementId, pointerId);
+        }
+        public async Task SPReleasePointer(string elementId, long pointerId)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("SPReleasePointer", elementId, pointerId);
+        }
+
         public async ValueTask DisposeAsync()
         {
             if (moduleTask.IsValueCreated)

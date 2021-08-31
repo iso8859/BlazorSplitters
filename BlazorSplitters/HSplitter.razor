@@ -1,18 +1,18 @@
-﻿<div id="splitterH01" class="splitterH">
-    <div class="noselect" style="flex-basis: 20%">
+﻿<div id="@m_guid" class="splitterH">
+    <div class="noselect" style="flex-basis: @SizePanel1">
         <CascadingValue Value=@this>
             @TopChild
         </CascadingValue>
     </div>
 
-    <div class="hslider"
-         @onmousedown="mousedown"
-         @onmousemove="mousemove"
-         @onmouseup="mouseup"
+    <div id="@(m_guid)_hslider" class="hslider"
+         @onpointerdown="onpointerdown"     @onpointerdown:preventDefault
+         @onpointermove="onpointermove"     @onpointermove:preventDefault
+         @onpointerup="onpointerup"         @onpointerup:preventDefault
          >
     </div>
 
-    <div class="noselect" style="flex-basis: 80%">
+    <div class="noselect">
         <CascadingValue Value=@this>
             @BottomChild
         </CascadingValue>

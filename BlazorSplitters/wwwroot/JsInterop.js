@@ -4,3 +4,13 @@
 export function SPGetBoundingRect(elementId) {
     return JSON.stringify(document.getElementById(elementId).getBoundingClientRect());
 }
+
+export function SPCapturePointer(id, p) {
+    var el = document.getElementById(id);
+    el.setPointerCapture(p);
+}
+
+export function SPReleasePointer(id, p) {
+    var el = document.getElementById(id);
+    el.releasePointerCapture(p);
+}
