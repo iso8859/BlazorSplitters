@@ -1,0 +1,20 @@
+﻿<div id="splitterH01" class="splitterH">
+    <div class="noselect" style="flex-basis: 20%">
+        <CascadingValue Value=@this>
+            @TopChild
+        </CascadingValue>
+    </div>
+
+    <div class="hslider"
+         @onmousedown="mousedown"
+         @onmousemove="mousemove"
+         @onmouseup="mouseup"
+         >
+    </div>
+
+    <div class="noselect" style="flex-basis: 80%">
+        <CascadingValue Value=@this>
+            @BottomChild
+        </CascadingValue>
+    </div>
+</div>
