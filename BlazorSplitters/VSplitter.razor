@@ -1,13 +1,13 @@
 ﻿@inherits SplitterCommon
 
-<div id="@m_guid" class="splitterH">
+<div id="@m_guid" class="splitterV">
     <div class="panel" style="flex-basis: @SizeFirstPanel">
         <CascadingValue Value=@this>
             @FirstPanel
         </CascadingValue>
     </div>
 
-    <div id="@(m_guid)_slider" class="hslider"
+    <div id="@(m_guid)_slider" class="vslider"
          @onpointerdown="onpointerdown" @onpointerdown:preventDefault
          @onpointermove="onpointermove" @onpointermove:preventDefault
          @onpointerup="onpointerup" @onpointerup:preventDefault>

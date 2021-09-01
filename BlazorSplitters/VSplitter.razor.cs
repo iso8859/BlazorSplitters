@@ -6,11 +6,11 @@ using System;
 
 namespace BlazorSplitters
 {
-    public partial class HSplitter : SplitterCommon
+    public partial class VSplitter : SplitterCommon
     {
-        public HSplitter()
+        public VSplitter()
         {
-            orientation = 0;
+            orientation = 1;
         }
     }
 }

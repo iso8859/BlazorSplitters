@@ -1,8 +1,8 @@
-﻿.splitterH {
+﻿.splitterV {
     display: flex;
     height: 100%;
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .panel {
@@ -18,13 +18,13 @@
     flex-shrink: 0;
 */}
 
-.hslider {
+.vslider {
     border: 1px solid grey;
     background-color: lightgray;
-    height: 7px;
+    width: 7px;
 }
 
-    .hslider:hover {
+    .vslider:hover {
         background-color: lightcoral;
-        cursor: ns-resize;
+        cursor: ew-resize;
     }

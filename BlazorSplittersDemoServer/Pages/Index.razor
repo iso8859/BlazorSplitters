@@ -1,11 +1,25 @@
 ﻿@page "/"
-    <div style="width:500px; height:500px;border:solid;border-width:1px;">
-        <BlazorSplitters.HSplitter>
-            <TopChild>
-                Top
-            </TopChild>
-            <BottomChild>
-                Bottom
-            </BottomChild>
-        </BlazorSplitters.HSplitter>
-    </div>
+<p>@sizePanel1;@sizePanel2</p>
+<div style="width:500px; height:500px;border:solid;border-width:1px;">
+    <BlazorSplitters.HSplitter @bind-SizeFirstPanel="@sizePanel1">
+        <FirstPanel>
+            TOP
+        </FirstPanel>
+        <SecondPanel>
+                <BlazorSplitters.VSplitter @bind-SizeFirstPanel="@sizePanel2">
+                    <FirstPanel>
+                        LEFT
+                    </FirstPanel>
+                    <SecondPanel>
+                        RIGHT
+                    </SecondPanel>
+                </BlazorSplitters.VSplitter>
+        </SecondPanel>
+    </BlazorSplitters.HSplitter>
+</div>
+
+@code
+{
+    string sizePanel1 = "40%";
+    string sizePanel2 = "20%";
+}
