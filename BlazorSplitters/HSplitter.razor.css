@@ -18,13 +18,28 @@
     flex-shrink: 0;
 */}
 
-.hslider {
-    border: 1px solid grey;
+.hslider {    
     background-color: lightgray;
-    height: 7px;
+    height: 10px;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    justify-content: center;
 }
 
     .hslider:hover {
         background-color: lightcoral;
         cursor: ns-resize;
     }
+.arrow{
+    display:flex;
+}
+
+.arrow:hover{
+    background-color: red;
+    cursor: pointer;
+}
+.handle{
+    display:flex;
+    min-width: 20px;
+}

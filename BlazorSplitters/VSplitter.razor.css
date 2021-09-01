@@ -19,12 +19,28 @@
 */}
 
 .vslider {
-    border: 1px solid grey;
     background-color: lightgray;
-    width: 7px;
+    width: 10px;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    justify-content: center;
 }
 
     .vslider:hover {
         background-color: lightcoral;
         cursor: ew-resize;
     }
+.arrow {
+    display: flex;
+}
+
+    .arrow:hover {
+        background-color: red;
+        cursor: pointer;
+    }
+
+.handle {
+    display: flex;
+    min-height: 20px;
+}
