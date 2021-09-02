@@ -34,7 +34,7 @@ namespace BlazorSplitters
             }
         }
 
-        protected string SizeSecondPanel;
+        protected string SizeSecondPanel = "50%";
 
         [Parameter]
         public EventCallback<string> SizeFirstPanelChanged { get; set; }
@@ -84,10 +84,10 @@ namespace BlazorSplitters
                         percent = 100 * (pos / rect.width);
                     }
 
-                    if (percent < 5)
-                        percent = 5;
-                    if (percent > 95)
-                        percent = 95;
+                    if (percent < 0)
+                        percent = 0;
+                    if (percent > 100)
+                        percent = 100;
                     double finalPercent = Math.Round(percent, 2);
                     SizeFirstPanel = $"{finalPercent.ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
                     SizeSecondPanel = $"{(100-finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";

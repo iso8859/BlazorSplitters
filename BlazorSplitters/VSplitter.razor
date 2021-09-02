@@ -1,30 +1,21 @@
 ﻿@inherits SplitterCommon
+@*calc(a-b) is incorrect, calc(a - b) is correct*@
+<div id="@m_guid" class="splitterV" style="grid-template-columns: calc(@SizeFirstPanel - 10px) 10px @SizeSecondPanel;">
+    <div class="panel">
+        <CascadingValue Value=@this>
+            @FirstPanel
+        </CascadingValue>
+    </div>
 
-<div id="@m_guid" class="splitterV">
-    @if (SizeFirstPanel != "0%")
-    {
-<div class="panel" style="flex-basis: @SizeFirstPanel">
-    <CascadingValue Value=@this>
-        @FirstPanel
-    </CascadingValue>
-</div>}
-
-    <div id="@(m_guid)_slider" class="vslider"
-         @onpointerdown="onpointerdown" @onpointerdown:preventDefault
-         @onpointermove="onpointermove" @onpointermove:preventDefault
-         @onpointerup="onpointerup" @onpointerup:preventDefault>
+    <div id="@(m_guid)_slider" class="vslider" @onpointerdown="onpointerdown" @onpointermove="onpointermove" @onpointerup="onpointerup">
         <div class="arrow" @onpointerdown="(e)=>Direct(0)"><IconLeft /></div>
-        <div class="handle" />
+        <div class="handle"></div>
         <div class="arrow" @onpointerdown="(e)=>Direct(100)"><IconRight /></div>
     </div>
 
-
-@if (SizeFirstPanel!="100%")
-    {
-    <div class="panel" style="flex-basis: @SizeSecondPanel">
+    <div class="panel">
         <CascadingValue Value=@this>
             @SecondPanel
         </CascadingValue>
     </div>
-    }
 </div>

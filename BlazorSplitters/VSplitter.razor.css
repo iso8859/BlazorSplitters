@@ -1,8 +1,8 @@
 ﻿.splitterV {
-    display: flex;
+    display: grid;
     height: 100%;
     width: 100%;
-    flex-direction: row;
+    overflow: hidden;
 }
 
 .panel {
@@ -13,14 +13,11 @@
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     text-overflow: ellipsis;
-    overflow: hidden;
-/*    flex-grow: 0;
-    flex-shrink: 0;
-*/}
+    background-color: white;
+}
 
 .vslider {
     background-color: #F0F0F0;
-    width: 10px;
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
@@ -31,6 +28,7 @@
         background-color: #FFE0E0;
         cursor: ew-resize;
     }
+
 .arrow {
     display: flex;
 }
