@@ -19,7 +19,7 @@
 */}
 
 .vslider {
-    background-color: lightgray;
+    background-color: #F0F0F0;
     width: 10px;
     display: flex;
     flex: 0 0 auto;
@@ -28,7 +28,7 @@
 }
 
     .vslider:hover {
-        background-color: lightcoral;
+        background-color: #FFE0E0;
         cursor: ew-resize;
     }
 .arrow {

@@ -12,6 +12,7 @@ namespace BlazorSplitters
     public class SplitterCommon : Microsoft.AspNetCore.Components.ComponentBase
     {
         public int orientation = 0; // 0 = horizontal, 1 = vertical
+        public int mode = 0; // 0 = percent, 1 = pixel
 
         [Parameter]
         public RenderFragment FirstPanel { get; set; }
@@ -32,6 +33,8 @@ namespace BlazorSplitters
                 SizeFirstPanelChanged.InvokeAsync(value);
             }
         }
+
+        protected string SizeSecondPanel;
 
         [Parameter]
         public EventCallback<string> SizeFirstPanelChanged { get; set; }
@@ -67,26 +70,46 @@ namespace BlazorSplitters
         {
             if (state == 1 && rect != null)
             {
-                double pos = 0, percent = 0;
-                if (orientation == 0)
+                if (mode == 0)
                 {
-                    pos = e.ClientY - rect.top;
-                    percent = 100 * (pos / rect.height);
+                    double pos = 0, percent = 0;
+                    if (orientation == 0)
+                    {
+                        pos = e.ClientY - rect.top;
+                        percent = 100 * (pos / rect.height);
+                    }
+                    else
+                    {
+                        pos = e.ClientX - rect.left;
+                        percent = 100 * (pos / rect.width);
+                    }
+
+                    if (percent < 5)
+                        percent = 5;
+                    if (percent > 95)
+                        percent = 95;
+                    double finalPercent = Math.Round(percent, 2);
+                    SizeFirstPanel = $"{finalPercent.ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
+                    SizeSecondPanel = $"{(100-finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
+                    // Console.WriteLine($"{pos};{percent};{finalPercent};{SizePanel1};{SizePanel2}");
                 }
                 else
                 {
-                    pos = e.ClientX - rect.left;
-                    percent = 100 * (pos / rect.width);
+                    double pos = 0, size=0;
+                    if (orientation == 0)
+                    {
+                        pos = e.ClientY - rect.top;
+                        size = rect.width;
+                    }
+                    else
+                    {
+                        pos = e.ClientX - rect.left;
+                        size = rect.height;
+                    }
+                    pos = Math.Round(pos, 2);
+                    SizeFirstPanel = $"{pos.ToString(System.Globalization.CultureInfo.InvariantCulture)}px";
+                    SizeSecondPanel = $"{(size-pos).ToString(System.Globalization.CultureInfo.InvariantCulture)}px";
                 }
-
-                if (percent < 5)
-                    percent = 5;
-                if (percent > 95)
-                    percent = 95;
-                double finalPercent = Math.Round(percent, 2);
-                SizeFirstPanel = $"{finalPercent.ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
-                //SizePanel2 = $"{(100-finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
-                // Console.WriteLine($"{pos};{percent};{finalPercent};{SizePanel1};{SizePanel2}");
             }
         }
 
@@ -99,5 +122,9 @@ namespace BlazorSplitters
             }
         }
 
+        protected void Direct(int percent)
+        {
+            SizeFirstPanel = $"{percent}%";
+        }
     }
 }

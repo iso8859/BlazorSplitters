@@ -11,6 +11,7 @@ namespace BlazorSplitters
         public VSplitter()
         {
             orientation = 1;
+            mode = 1;
         }
     }
 }

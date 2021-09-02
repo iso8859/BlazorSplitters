@@ -1,25 +1,30 @@
 ﻿@inherits SplitterCommon
 
 <div id="@m_guid" class="splitterV">
-    <div class="panel" style="flex-basis: @SizeFirstPanel">
-        <CascadingValue Value=@this>
-            @FirstPanel
-        </CascadingValue>
-    </div>
+    @if (SizeFirstPanel != "0%")
+    {
+<div class="panel" style="flex-basis: @SizeFirstPanel">
+    <CascadingValue Value=@this>
+        @FirstPanel
+    </CascadingValue>
+</div>}
 
     <div id="@(m_guid)_slider" class="vslider"
          @onpointerdown="onpointerdown" @onpointerdown:preventDefault
          @onpointermove="onpointermove" @onpointermove:preventDefault
          @onpointerup="onpointerup" @onpointerup:preventDefault>
-        <div class="arrow"><IconLeft /></div>
-        <div class="handle"/>
-        <div class="arrow"><IconRight /></div>
-
+        <div class="arrow" @onpointerdown="(e)=>Direct(0)"><IconLeft /></div>
+        <div class="handle" />
+        <div class="arrow" @onpointerdown="(e)=>Direct(100)"><IconRight /></div>
     </div>
 
-    <div class="panel">
+
+@if (SizeFirstPanel!="100%")
+    {
+    <div class="panel" style="flex-basis: @SizeSecondPanel">
         <CascadingValue Value=@this>
             @SecondPanel
         </CascadingValue>
     </div>
+    }
 </div>
