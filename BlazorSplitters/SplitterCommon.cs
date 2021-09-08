@@ -30,6 +30,8 @@ namespace BlazorSplitters
                 if (value == m_sizeFirstPanel)
                     return;
                 m_sizeFirstPanel = value;
+                double finalPercent = double.Parse(m_sizeFirstPanel.Trim('%'), System.Globalization.CultureInfo.InvariantCulture);
+                SizeSecondPanel = $"{(100 - finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
                 SizeFirstPanelChanged.InvokeAsync(value);
             }
         }
@@ -90,7 +92,7 @@ namespace BlazorSplitters
                         percent = 100;
                     double finalPercent = Math.Round(percent, 2);
                     SizeFirstPanel = $"{finalPercent.ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
-                    SizeSecondPanel = $"{(100-finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
+                    // SizeSecondPanel = $"{(100-finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
                     // Console.WriteLine($"{pos};{percent};{finalPercent};{SizePanel1};{SizePanel2}");
                 }
                 else
@@ -108,7 +110,7 @@ namespace BlazorSplitters
                     }
                     pos = Math.Round(pos, 2);
                     SizeFirstPanel = $"{pos.ToString(System.Globalization.CultureInfo.InvariantCulture)}px";
-                    SizeSecondPanel = $"{(size-pos).ToString(System.Globalization.CultureInfo.InvariantCulture)}px";
+                    // SizeSecondPanel = $"{(size-pos).ToString(System.Globalization.CultureInfo.InvariantCulture)}px";
                 }
             }
         }
