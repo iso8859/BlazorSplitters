@@ -20,23 +20,8 @@ namespace BlazorSplitters
         [Parameter]
         public RenderFragment SecondPanel { get; set; }
 
-        string m_sizeFirstPanel = "50%";
         [Parameter]
-        public string SizeFirstPanel
-        {
-            get { return m_sizeFirstPanel; }
-            set
-            {
-                if (value == m_sizeFirstPanel)
-                    return;
-                m_sizeFirstPanel = value;
-                double finalPercent = double.Parse(m_sizeFirstPanel.Trim('%'), System.Globalization.CultureInfo.InvariantCulture);
-                SizeSecondPanel = $"{(100 - finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
-                SizeFirstPanelChanged.InvokeAsync(value);
-            }
-        }
-
-        protected string SizeSecondPanel = "50%";
+        public string SizeFirstPanel { get; set; } = "50%";
 
         [Parameter]
         public EventCallback<string> SizeFirstPanelChanged { get; set; }
@@ -50,6 +35,25 @@ namespace BlazorSplitters
         protected override void OnInitialized()
         {
             m_guid = Guid.NewGuid().ToString();
+        }
+
+        protected string m_sizeFirstPanel;
+        protected string m_sizeSecondPanel;
+        bool m_parameterSet = false;
+        protected override void OnParametersSet()
+        {
+            if (!m_parameterSet)
+            {
+                m_sizeFirstPanel = SizeFirstPanel;
+                ComputeFinalSize();
+                m_parameterSet = true;
+            }
+        }
+
+        void ComputeFinalSize()
+        {
+            double finalPercent = double.Parse(m_sizeFirstPanel.Trim('%'), System.Globalization.CultureInfo.InvariantCulture);
+            m_sizeSecondPanel = $"{(100 - finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
         }
 
         JsInterop GetJs()
@@ -91,9 +95,8 @@ namespace BlazorSplitters
                     if (percent > 100)
                         percent = 100;
                     double finalPercent = Math.Round(percent, 2);
-                    SizeFirstPanel = $"{finalPercent.ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
-                    // SizeSecondPanel = $"{(100-finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
-                    // Console.WriteLine($"{pos};{percent};{finalPercent};{SizePanel1};{SizePanel2}");
+                    m_sizeFirstPanel = $"{finalPercent.ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
+                    ComputeFinalSize();
                 }
                 else
                 {
@@ -109,8 +112,8 @@ namespace BlazorSplitters
                         size = rect.height;
                     }
                     pos = Math.Round(pos, 2);
-                    SizeFirstPanel = $"{pos.ToString(System.Globalization.CultureInfo.InvariantCulture)}px";
-                    // SizeSecondPanel = $"{(size-pos).ToString(System.Globalization.CultureInfo.InvariantCulture)}px";
+                    m_sizeFirstPanel = $"{pos.ToString(System.Globalization.CultureInfo.InvariantCulture)}px";
+                    ComputeFinalSize();
                 }
             }
         }
@@ -126,7 +129,8 @@ namespace BlazorSplitters
 
         protected void Direct(int percent)
         {
-            SizeFirstPanel = $"{percent}%";
+            m_sizeFirstPanel = $"{percent}%";
+            ComputeFinalSize();
         }
     }
 }

@@ -2,14 +2,14 @@
 <button @onclick="(e)=> { AddText(ref top); }">TOP+</button>
 <button @onclick="(e)=> { AddText(ref left); }">LEFT+</button>
 <button @onclick="(e)=> { AddText(ref right); }">RIGHT+</button>
-<p>@sizePanel1;@sizePanel2</p>
+<p>@ss.sizePanel1;@ss.sizePanel2</p>
 <div style="width:500px; height:500px;border:solid;border-width:1px;">
-    <BlazorSplitters.HSplitter @bind-SizeFirstPanel="@sizePanel1">
+    <BlazorSplitters.HSplitter @bind-SizeFirstPanel="@ss.sizePanel1">
         <FirstPanel>
             <span>@(top)</span>
         </FirstPanel>
         <SecondPanel>
-            <BlazorSplitters.VSplitter @bind-SizeFirstPanel="@sizePanel2">
+            <BlazorSplitters.VSplitter @bind-SizeFirstPanel="@ss.sizePanel2">
                 <FirstPanel>
                     <span>@(left)</span>
                 </FirstPanel>
@@ -23,8 +23,12 @@
 
 @code
 {
-    string sizePanel1 = "40%";
-    string sizePanel2 = "20%";
+    public class SplittersState
+    {
+        public string sizePanel1 = "40%";
+        public string sizePanel2 = "20%";
+    }
+    SplittersState ss = new SplittersState();
     string text = "To provide a more reasonable default minimum size for grid items, this specification defines that the auto value of min-width / min-height also applies an automatic minimum size in the specified axis to grid items whose overflow is visible. (The effect is analogous to the automatic minimum size imposed on flex items.)";
     string top, left, right;
 

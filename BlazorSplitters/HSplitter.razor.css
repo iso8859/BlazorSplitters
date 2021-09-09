@@ -14,8 +14,8 @@
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     text-overflow: ellipsis;
     background-color: white;
-    min-width:0;
-    min-height:0;
+    min-width: 0; /* https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items */
+    min-height: 0;
 }
 
 .hslider {

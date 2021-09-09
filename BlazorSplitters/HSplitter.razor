@@ -1,6 +1,6 @@
 ﻿@inherits SplitterCommon
 @*calc(a-b) is incorrect, calc(a - b) is correct*@
-<div id="@m_guid" class="splitterH" style="grid-template-rows: calc(@SizeFirstPanel - 10px) 10px @SizeSecondPanel;">
+<div id="@m_guid" class="splitterH" style="grid-template-rows: calc(@m_sizeFirstPanel - 10px) 10px @m_sizeSecondPanel;">
     <div class="panel">
         <CascadingValue Value=@this>
             @FirstPanel

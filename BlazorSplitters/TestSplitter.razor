@@ -1,0 +1,22 @@
+﻿<CascadingValue Value="this">
+    @{ 
+        int i = 1;
+    }
+    @foreach (Panel child in m_childs)
+    {
+        <p>@i .. @child</p>
+        i++;
+    }
+    @ChildContent @*do be present for system to work*@
+</CascadingValue>
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    List<Panel> m_childs = new List<Panel>();
+    public void AddPanel(Panel child)
+    {
+        m_childs.Add(child);
+        StateHasChanged();
+    }
+}
