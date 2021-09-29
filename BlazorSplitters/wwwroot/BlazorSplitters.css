@@ -1,0 +1,94 @@
+.vsplitter {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.panel {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    text-overflow: ellipsis;
+    background-color: white;
+    min-width: 0;
+    min-height: 0;
+}
+
+.vslider {
+    background-color: #F0F0F0;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .vslider:hover {
+        background-color: #FFE0E0;
+        cursor: ew-resize;
+    }
+
+.varrow {
+    display: flex;
+}
+
+    .varrow:hover {
+        background-color: red;
+        cursor: pointer;
+    }
+
+.vhandle {
+    display: flex;
+    min-height: 20px;
+}
+
+
+.hsplitter {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.panel {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    text-overflow: ellipsis;
+    background-color: white;
+    min-width: 0; /* https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items */
+    min-height: 0;
+}
+
+.hslider {
+    background-color: #F0F0F0;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    justify-content: center;
+}
+
+    .hslider:hover {
+        background-color: #FFE0E0;
+        cursor: ns-resize;
+    }
+
+.harrow {
+    display: flex;
+}
+
+    .harrow:hover {
+        background-color: red;
+        cursor: pointer;
+    }
+
+.hhandle {
+    display: flex;
+    min-width: 20px;
+}

@@ -1,6 +1,6 @@
 ﻿@inherits SplitterCommon
 @*calc(a-b) is incorrect, calc(a - b) is correct*@
-<div id="@m_guid" class="splitterV" style="grid-template-columns: calc(@m_sizeFirstPanel - 10px) 10px @m_sizeSecondPanel;">
+<div id="@m_guid" class="vsplitter" style="grid-template-columns: calc(@m_sizeFirstPanel - 10px) 10px @m_sizeSecondPanel;">
     <div class="panel">
         <CascadingValue Value=@this>
             @FirstPanel
@@ -8,9 +8,9 @@
     </div>
 
     <div id="@(m_guid)_slider" class="vslider" @onpointerdown="onpointerdown" @onpointermove="onpointermove" @onpointerup="onpointerup">
-        <div class="arrow" @onpointerdown="(e)=>Direct(0)"><IconLeft /></div>
-        <div class="handle"></div>
-        <div class="arrow" @onpointerdown="(e)=>Direct(100)"><IconRight /></div>
+        <div class="varrow" @onpointerdown="(e)=>Direct(0)"><IconLeft /></div>
+        <div class="vhandle"></div>
+        <div class="varrow" @onpointerdown="(e)=>Direct(100)"><IconRight /></div>
     </div>
 
     <div class="panel">
