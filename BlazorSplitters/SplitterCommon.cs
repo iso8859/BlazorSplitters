@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlazorSplitters
 {
+    public enum Visibility { Both, First, Second, None };
     public class SplitterCommon : Microsoft.AspNetCore.Components.ComponentBase
     {
         public int orientation = 0; // 0 = horizontal, 1 = vertical
@@ -25,6 +26,9 @@ namespace BlazorSplitters
 
         [Parameter]
         public EventCallback<string> SizeFirstPanelChanged { get; set; }
+
+        [Parameter]
+        public Visibility VisiblePanel { get; set; } = Visibility.Both;
 
         [Inject]
         IJSRuntime JSRuntime { get; set; }
