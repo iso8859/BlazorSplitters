@@ -9,6 +9,21 @@ using System.Threading.Tasks;
 
 namespace BlazorSplitters
 {
+    public class Sizes
+    {
+        string m_first;
+        public string First {
+            get => m_first;
+            set
+            {
+                double finalPercent = double.Parse(value.Trim('%'), System.Globalization.CultureInfo.InvariantCulture);
+                m_first = $"{finalPercent.ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
+                Second = $"{(100 - finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
+            }
+        }
+        public string Second { get; set; }
+
+    }
     public enum Visibility { Both, First, Second, None };
     public class SplitterCommon : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -22,10 +37,12 @@ namespace BlazorSplitters
         public RenderFragment SecondPanel { get; set; }
 
         [Parameter]
-        public string SizeFirstPanel { get; set; } = "50%";
+        public Sizes Sizes { get; set; }
 
         [Parameter]
-        public EventCallback<string> SizeFirstPanelChanged { get; set; }
+        public EventCallback<Sizes> SizesChangedMove { get; set; }
+        [Parameter]
+        public EventCallback<Sizes> SizesChangedFinal { get; set; }
 
         [Parameter]
         public Visibility VisiblePanel { get; set; } = Visibility.Both;
@@ -40,26 +57,6 @@ namespace BlazorSplitters
         {
             m_guid = Guid.NewGuid().ToString();
         }
-
-        protected string m_sizeFirstPanel;
-        protected string m_sizeSecondPanel;
-        bool m_parameterSet = false;
-        protected override void OnParametersSet()
-        {
-            if (!m_parameterSet)
-            {
-                m_sizeFirstPanel = SizeFirstPanel;
-                ComputeFinalSize();
-                m_parameterSet = true;
-            }
-        }
-
-        void ComputeFinalSize()
-        {
-            double finalPercent = double.Parse(m_sizeFirstPanel.Trim('%'), System.Globalization.CultureInfo.InvariantCulture);
-            m_sizeSecondPanel = $"{(100 - finalPercent).ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
-        }
-
         JsInterop GetJs()
         {
             if (jsInterop == null)
@@ -76,7 +73,7 @@ namespace BlazorSplitters
             rect = await GetJs().SPGetBoundingRect(m_guid);
         }
 
-        protected void onpointermove(PointerEventArgs e)
+        protected async Task onpointermove(PointerEventArgs e)
         {
             if (state == 1 && rect != null)
             {
@@ -99,8 +96,7 @@ namespace BlazorSplitters
                     if (percent > 100)
                         percent = 100;
                     double finalPercent = Math.Round(percent, 2);
-                    m_sizeFirstPanel = $"{finalPercent.ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
-                    ComputeFinalSize();
+                    Sizes.First = $"{finalPercent.ToString(System.Globalization.CultureInfo.InvariantCulture)}%";
                 }
                 else
                 {
@@ -116,9 +112,9 @@ namespace BlazorSplitters
                         size = rect.height;
                     }
                     pos = Math.Round(pos, 2);
-                    m_sizeFirstPanel = $"{pos.ToString(System.Globalization.CultureInfo.InvariantCulture)}px";
-                    ComputeFinalSize();
+                    Sizes.First = $"{pos.ToString(System.Globalization.CultureInfo.InvariantCulture)}px";
                 }
+                await SizesChangedMove.InvokeAsync(Sizes);
             }
         }
 
@@ -128,13 +124,13 @@ namespace BlazorSplitters
             {
                 await GetJs().SPReleasePointer(m_guid + "_slider", e.PointerId);
                 state = -1;
+                await SizesChangedFinal.InvokeAsync(Sizes);
             }
         }
 
         protected void Direct(int percent)
         {
-            m_sizeFirstPanel = $"{percent}%";
-            ComputeFinalSize();
+            Sizes.First = $"{percent}%";
         }
     }
 }

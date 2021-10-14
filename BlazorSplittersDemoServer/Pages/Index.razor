@@ -1,15 +1,16 @@
 ﻿@page "/"
+@using BlazorSplitters
 <button @onclick="(e)=> { AddText(ref top); }">TOP+</button>
 <button @onclick="(e)=> { AddText(ref left); }">LEFT+</button>
 <button @onclick="(e)=> { AddText(ref right); }">RIGHT+</button>
-<p>@ss.sizePanel1;@ss.sizePanel2</p>
+<p>@m_sizes1.First;@m_sizes1.Second</p>
 <div style="width:500px; height:500px;border:solid;border-width:1px;">
-    <BlazorSplitters.HSplitter @bind-SizeFirstPanel="@ss.sizePanel1">
+    <BlazorSplitters.HSplitter Sizes="@m_sizes1" SizesChangedMove="(s)=>{}" SizesChangedFinal="(s)=>{}">
         <FirstPanel>
             <span>@(top)</span>
         </FirstPanel>
         <SecondPanel>
-            <BlazorSplitters.VSplitter @bind-SizeFirstPanel="@ss.sizePanel2">
+            <BlazorSplitters.VSplitter Sizes="@m_sizes2">
                 <FirstPanel>
                     <span>@(left)</span>
                 </FirstPanel>
@@ -23,12 +24,8 @@
 
 @code
 {
-    public class SplittersState
-    {
-        public string sizePanel1 = "40%";
-        public string sizePanel2 = "20%";
-    }
-    SplittersState ss = new SplittersState();
+    Sizes m_sizes1 = new Sizes() { First = "40%" };
+    Sizes m_sizes2 = new Sizes() { First = "40%" };
     string text = "To provide a more reasonable default minimum size for grid items, this specification defines that the auto value of min-width / min-height also applies an automatic minimum size in the specified axis to grid items whose overflow is visible. (The effect is analogous to the automatic minimum size imposed on flex items.)";
     string top, left, right;
 

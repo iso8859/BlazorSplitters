@@ -2,7 +2,7 @@
 @*calc(a-b) is incorrect, calc(a - b) is correct*@
 @if (VisiblePanel == Visibility.Both)
 {
-    <div id="@m_guid" class="vsplitter" style="grid-template-columns: calc(@m_sizeFirstPanel - 10px) 10px @m_sizeSecondPanel;">
+    <div id="@m_guid" class="vsplitter" style="grid-template-columns: calc(@Sizes.First - 10px) 10px @Sizes.Second;">
         <div class="panel">
             <CascadingValue Value=@this>
                 @FirstPanel
