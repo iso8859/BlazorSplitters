@@ -23,6 +23,13 @@ namespace BlazorSplitters
         }
         public string Second { get; set; }
 
+        public static Sizes Direct(string first)
+        {
+            var tmp = new Sizes();
+            tmp.First = first;
+            return tmp;
+        }
+
     }
     public enum Visibility { Both, First, Second, None };
     public class SplitterCommon : Microsoft.AspNetCore.Components.ComponentBase
