@@ -7,10 +7,14 @@ export function SPGetBoundingRect(elementId) {
 
 export function SPCapturePointer(id, p) {
     var el = document.getElementById(id);
-    el.setPointerCapture(p);
+    if (el !== null) {
+        el.setPointerCapture(p);
+    }
 }
 
 export function SPReleasePointer(id, p) {
     var el = document.getElementById(id);
-    el.releasePointerCapture(p);
+    if (el !== null) {
+        el.releasePointerCapture(p);
+    }
 }
